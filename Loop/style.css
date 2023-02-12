@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  border: 5px solid palegoldenrod;
+  padding: 20px 0px 100px 0px;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.container {
+  width: 100vw;
+  margin: 0 auto;
+  max-width: 1170px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+.student-container {
+  padding: 10px;
+  margin: 10px;
+  border: 2px solid slategray;
+  border-radius: 10px;
+}
+
+.student-name {
+  font-weight: bold;
+}
+
+.student-grade {
+  font-weight: bold;
+}
