@@ -25,7 +25,7 @@ const counterMaker = (targetDateInput) => {
     messageContainer.style.display = "flex";
     messageContainer.innerHTML = "<h3>타이머가 종료 되었습니다.</h3>";
     return;
-  } else if (isNaN(targetDate)) {
+  } else if (isNaN(remaining)) {
     container.style.display = "none";
     messageContainer.style.display = "flex";
     messageContainer.innerHTML = "<h3>유효한 시간대가 아닙니다.</h3>";
@@ -42,9 +42,18 @@ const counterMaker = (targetDateInput) => {
   const timeKeys = Object.keys(remainingObj);
   const documentArr = ["days", "hours", "minutes", "seconds"];
 
+  const format = (time) => {
+    if (time < 10) {
+      return "0" + time;
+    } else {
+      return time;
+    }
+  };
+
   let i = 0;
   for (let tag of documentArr) {
-    document.getElementById(tag).textContent = remainingObj[timeKeys[i++]];
+    const remainingTime = remainingObj[timeKeys[i++]];
+    document.getElementById(tag).textContent = format(remainingTime);
   }
 };
 
@@ -52,6 +61,7 @@ const starter = () => {
   const targetDateInput = dateFormMaker();
   container.style.display = "flex";
   messageContainer.style.display = "none";
+  setClearInterval(); // 버튼이 눌리면 기존 interval 모두 삭제
   counterMaker(targetDateInput);
   const intervalId = setInterval(() => {
     counterMaker(targetDateInput);
