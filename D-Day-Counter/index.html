@@ -28,12 +28,13 @@
         <span>초</span>
       </div>
     </div>
-    <div id="d-day-message">{messageContainer}</div>
+    <div id="d-day-message"></div>
     <div id="target-selector">
       <input id="target-year-input" class="target-input" size="5" /> -
       <input id="target-month-input" class="target-input" size="5" /> -
       <input id="target-date-input" class="target-input" size="5" />
     </div>
-    <button onclick="counterMaker()" id="start-btn">카운트다운 시작</button>
+    <button onclick="starter()" class="btn">카운트다운 시작</button>
+    <button onclick="setClearInterval()" class="btn">타이머 초기화</button>
   </body>
 </html>
