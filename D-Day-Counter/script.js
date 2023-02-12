@@ -15,8 +15,7 @@ const dateFormMaker = () => {
   return dateFormat;
 };
 
-const counterMaker = () => {
-  const targetDateInput = dateFormMaker();
+const counterMaker = (targetDateInput) => {
   const nowDate = new Date();
   const targetDate = new Date(targetDateInput).setHours(0, 0, 0, 0); // 자정을 기준으로 세팅
   const remaining = (targetDate - nowDate) / 1000; // remaining: 초 기준으로 작성됨
@@ -50,18 +49,26 @@ const counterMaker = () => {
 };
 
 const starter = () => {
+  const targetDateInput = dateFormMaker();
   container.style.display = "flex";
   messageContainer.style.display = "none";
-  counterMaker();
-  const intervalId = setInterval(counterMaker, 1000);
+  counterMaker(targetDateInput);
+  const intervalId = setInterval(() => {
+    counterMaker(targetDateInput);
+  }, 1000);
+
   intervalIdArr.push(intervalId);
 };
 
 const setClearInterval = () => {
-  container.style.display = "none";
-  messageContainer.style.display = "flex";
-  messageContainer.innerHTML = "<h3>D-Day를 입력해주세요.</h3>";
   for (let i = 0; i < intervalIdArr.length; i++) {
     clearInterval(intervalIdArr[i]);
   }
+};
+
+const resetTimer = () => {
+  container.style.display = "none";
+  messageContainer.style.display = "flex";
+  messageContainer.innerHTML = "<h3>D-Day를 입력해주세요.</h3>";
+  setClearInterval();
 };
