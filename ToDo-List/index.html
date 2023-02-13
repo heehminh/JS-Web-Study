@@ -7,9 +7,13 @@
   </head>
   <body>
     <h1>ToDo</h1>
+    <div class="info">항목을 더블클릭하면 항목이 제거됩니다</div>
     <div class="todo-container">
       <input type="text" id="todo-input" onkeydown="keyCodeCheck()" />
       <ul id="todo-list"></ul>
+    </div>
+    <div class="delete-btn-wrapper" onclick="deleteAll()">
+      <button>전체 삭제</button>
     </div>
   </body>
 </html>

@@ -11,6 +11,10 @@ body {
   min-height: 100vh;
 }
 
+.info {
+  margin-bottom: 5px;
+}
+
 .todo-container {
   max-width: 100%;
   width: 400px;
@@ -55,4 +59,15 @@ li button {
 
 li button:active {
   border: 2px solid gray;
+}
+
+.delete-btn-wrapper {
+  margin-top: 1rem;
+}
+
+.delete-btn-wrapper button {
+  font-weight: bold;
+  background-color: antiquewhite;
+  padding: 0.2rem 1rem;
+  cursor: pointer;
 }
