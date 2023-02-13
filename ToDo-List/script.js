@@ -73,3 +73,18 @@ const deleteAll = () => {
   }
   saveItemsFn();
 };
+
+const accessToGeo = (position) => {
+  const positionObj = {
+    latitude: position.coords.latitude,
+    longitude: position.coords.longitude,
+  };
+};
+
+const askForLocation = () => {
+  navigator.geolocation.getCurrentPosition(accessToGeo, (err) => {
+    console.log(err);
+  });
+};
+
+askForLocation();
