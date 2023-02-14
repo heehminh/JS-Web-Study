@@ -74,11 +74,31 @@ const deleteAll = () => {
   saveItemsFn();
 };
 
+const weatherSearch = (position) => {
+  console.log(position.latitude);
+  const openWeatherRes = fetch(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=ba272a50d2e02b8972126c674e3664df`
+  )
+    .then((res) => {
+      // 1) JSON.parse() 응답 바디만 존재할 때
+      // 2) .json() 응답 헤더도 존재할 때
+      return res.json(); // 변환하는 데 시간이 좀 걸림
+    })
+    .then((json) => {
+      console.log(json.name, json.weather[0].description);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 const accessToGeo = (position) => {
   const positionObj = {
     latitude: position.coords.latitude,
     longitude: position.coords.longitude,
   };
+
+  weatherSearch(positionObj);
 };
 
 const askForLocation = () => {
