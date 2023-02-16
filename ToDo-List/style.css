@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: white;
+  background-image: url("./images/Clear.jpg");
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,8 +11,18 @@ body {
   min-height: 100vh;
 }
 
+h1 {
+  color: white;
+  text-shadow: 2px 2px gray;
+  opacity: 80%;
+}
+
 .info {
   margin-bottom: 5px;
+}
+
+input {
+  opacity: 80%;
 }
 
 .todo-container {
@@ -67,7 +77,16 @@ li button:active {
 
 .delete-btn-wrapper button {
   font-weight: bold;
+  border: 0px;
+  border-radius: 5px;
   background-color: antiquewhite;
   padding: 0.2rem 1rem;
   cursor: pointer;
+  box-shadow: 3px 3px gray;
+}
+
+.delete-btn-wrapper button:active {
+  box-shadow: 0px;
+  margin-left: 3px;
+  margin-top: 3px;
 }
