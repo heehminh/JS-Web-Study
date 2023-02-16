@@ -61,7 +61,7 @@ if (savedToDoList) {
 }
 
 const keyCodeCheck = () => {
-  if (window.event.keyCode === 13 && todoInput.value) {
+  if (window.event.keyCode === 13 && todoInput.value.trim()) {
     createTodo();
   }
 };
@@ -74,11 +74,34 @@ const deleteAll = () => {
   saveItemsFn();
 };
 
-const accessToGeo = (position) => {
+const weatherSearch = ({ latitude, longitude }) => {
+  console.log(latitude);
+  const openWeatherRes = fetch(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=ba272a50d2e02b8972126c674e3664df`
+  )
+    .then((res) => {
+      // 1) JSON.parse() 응답 바디만 존재할 때
+      // 2) .json() 응답 헤더도 존재할 때
+      return res.json(); // 변환하는 데 시간이 좀 걸림
+    })
+    .then((json) => {
+      console.log(json.name, json.weather[0].main);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const accessToGeo = ({ coords }) => {
+  // 구조분해할당
+  const { latitude, longitude } = coords;
+  // shorthand property
   const positionObj = {
-    latitude: position.coords.latitude,
-    longitude: position.coords.longitude,
+    latitude,
+    longitude,
   };
+
+  weatherSearch(positionObj);
 };
 
 const askForLocation = () => {
