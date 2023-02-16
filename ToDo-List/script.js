@@ -74,6 +74,22 @@ const deleteAll = () => {
   saveItemsFn();
 };
 
+const weatherDataActive = ({ location, weather }) => {
+  const weatherMainList = [
+    "Clear",
+    "Clouds",
+    "Drizzle",
+    "Rain",
+    "Snow",
+    "Thunderstorm",
+  ];
+  weather = weatherMainList.includes(weather) ? weather : "Fog";
+
+  const locationNameTag = document.querySelector("#location-name-tag");
+  locationNameTag.textContent = location;
+  document.body.style.backgroundImage = `url('./images/${weather}.jpg')`;
+};
+
 const weatherSearch = ({ latitude, longitude }) => {
   console.log(latitude);
   const openWeatherRes = fetch(
@@ -86,6 +102,11 @@ const weatherSearch = ({ latitude, longitude }) => {
     })
     .then((json) => {
       console.log(json.name, json.weather[0].main);
+      const weatherData = {
+        location: json.name,
+        weather: json.weather[0].main,
+      };
+      weatherDataActive(weatherData);
     })
     .catch((err) => {
       console.log(err);
