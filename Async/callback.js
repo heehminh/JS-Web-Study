@@ -27,3 +27,55 @@ function printWithDelay(print, timeout) {
 }
 printWithDelay(() => console.log("async callback"), 2000); // 비동기
 // 결과: 1 -> 3 -> "hello" -> 2 -> "async callback"
+
+// 3. Callback Hell의 예시
+class UserStorage {
+  loginUser(id, password, onSuccess, onError) {
+    setTimeout(() => {
+      if (
+        (id === "minhee" && password === "kim") ||
+        (id === "anna" && password === "elsa")
+      ) {
+        onSuccess(id);
+      } else {
+        onError(new Error("not found"));
+      }
+    }, 2000);
+  }
+
+  getRoles(user, onSuccess, onError) {
+    setTimeout(() => {
+      if (user === "minhee") {
+        onSuccess({ name: "minhee", role: "admin" });
+      } else {
+        onError(new Error("no access"));
+      }
+    }, 1000);
+  }
+}
+
+const userStorage = new UserStorage();
+const id = prompt("enter your id");
+const password = prompt("enter your password");
+
+// 로그인 -> (로그인한 사용자의 데이터로) 사용자의 역할을 받아옴
+userStorage.loginUser(
+  id,
+  password,
+  (user) => {
+    userStorage.getRoles(
+      user,
+      (userWithRole) => {
+        alert(
+          `Hello ${userWithRole.name}, you have a ${userWithRole.role} role!`
+        );
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  },
+  (error) => {
+    console.log(error);
+  }
+);
